@@ -1,3 +1,92 @@
 body {
     background-color: #0d1118;
 }
+
+.row {
+    padding: 24px 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 0;
+}
+.table td {
+    border: unset;
+}
+$blue: #00ceff;
+$blue-2: #0075ff;
+$text-color: #a4b0cb;
+
+.title {
+    color: white;
+    font-size: 32px;
+}
+
+.subtitle {
+    color: $text-color;
+    font-size: 24px;
+    font-weight: 400;
+}
+
+.blue {
+    color: $blue;
+}
+
+.btn {
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    &.pill {
+        border-radius: 32px;
+        background-color: transparent;
+        color: $text-color;
+        &.active {
+            background-color: $blue-2;
+            color: white;
+        }
+    }
+}
+
+.date-filters {
+    justify-content: end;
+    display: inline-flex;
+    margin: 0 12px;
+    background-color: #141c25;
+    padding: 8px 20px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+
+.dashboard-filter-btn {
+    font-weight: 500;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid transparent;
+    color: #fff;
+    border-radius: 4px;
+    &:hover {
+        border-color: $blue-2;
+    }
+}
+
+.text {
+    font-size: 16px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.text-label {
+    font-weight: 400;
+    font-size: 14px;
+    color: #636f80;
+}
+
+.white {
+    color: white;
+}

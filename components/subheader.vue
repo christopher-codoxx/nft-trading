@@ -39,3 +39,28 @@ export default Vue.extend({
     }
 })
 </script>
+
+
+<style lang="scss" scoped>
+    .sub-header{
+        background-color: #141c25;
+        padding: 12px 0;
+    }
+
+    .current-block-info {
+        display: flex;
+        color: #fff;
+        column-gap: 16px;
+        font-size: 16px;
+    }
+
+    .current-block-info-item{
+        display: inline-flex;
+        border-right: 1px solid rgba(255,255,255,0.2);
+        padding-right: 16px;
+        &:last-child{
+            border-right: none;
+        }
+
+    }
+</style>
