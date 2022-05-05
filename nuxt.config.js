@@ -41,9 +41,40 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/apollo'
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  apollo: {
+    clientConfigs: {
+
+    },
+    errorHandler: '~/apollo/errorHandling.js',
+  },
+  apollo: {
+    // Sets up the apollo client endpoints
+    clientConfigs: {
+      // recommended: use a file to declare the client configuration (see below for example)
+      default: {
+        httpEndpoint: 'https://graphql.icy.tools/graphql',
+        httpLinkOptions: {
+          headers: {
+            'x-api-key': 'cc41325fdea3457c84b11a93796bdeb8'
+          }
+        },
+      },
+
+    },
+
+
+    // watchLoading: '~/apollo/apollo-watch-loading-handler.js',
+
+    // setup a global error handler (see below for example)
+    errorHandler: '~/apollo/errorHandling.js',
+
+
   }
+
 }

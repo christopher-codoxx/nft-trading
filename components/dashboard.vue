@@ -8,7 +8,7 @@
                     <h2 class="subtitle">See what's selling. Prices updated in real time.</h2>
                 </div>
             </div>
-            <div class="row">
+            <div class="row pb-0">
                 <div class="col-12 col-md-4">
                       <NuxtLink to="/" class="btn pill active">Home page</NuxtLink>
                       <NuxtLink to="/discover" class="btn pill">Home page</NuxtLink>
@@ -16,7 +16,9 @@
 
                 <div class="col-12 col-md-8 text-right">
                     <div class="date-filters">
-                        <img src="https://via.placeholder.com/30" alt="">
+                        <span class="material-icons icon blue mr-2">
+                            whatshot
+                        </span>
                         <button class="dashboard-filter-btn">7d</button>
                         <button class="dashboard-filter-btn">15d</button>
                         <button class="dashboard-filter-btn">30d</button>
@@ -34,57 +36,80 @@
                     <td class="table-cell">MKT CAP</td>
                     <td class="table-cell">7D VOL</td>
                 </tr>
-                <tr class="table-row">
+                <tbody>
+
+ <template v-if="collections.length > 0">
+                <tr class="table-row" :key="index" v-for="( collection, index) in collections">
                     <td class="table-cell primary">
-                        <img src="https://icy.tools/image-url-resizer/?image=https://lh3.googleusercontent.com/yIm-M5-BpSDdTEIJRt5D6xphizhIdozXjqSITgK4phWq7MmAU3qE7Nw7POGCiPGyhtJ3ZFP8iJ29TFl-RLcGBWX5qI4-ZcnCPcsY4zI=s120&format=webp&metadata=none&onerror=redirect&width=40&height=40&quality=60" alt="">
-                        <div class="d-flex align-items-start flex-column ml-2">
-                            <p class="mb-0 text bold white">Coin Name</p>
+                        <img :src="collection.node.unsafeOpenseaImageUrl" alt="">
+                        <div class="d-flex align-items-start flex-column ml-3">
+                            <p class="mb-1 text bold white">{{collection.node.name}}</p>
                             <small class="text-label mb-0">
-                                Circulating supply: <b>95,850</b>
+                                Circulating supply: <b>{{sumAttributesArray(collection.node.attributes)}}</b>
                             </small>
                         </div>
                     </td>
                     <td class="table-cell">
-                        <p class="text bold white mb-0">4.18</p>
-                        <small class="text-label">
-                            <span class="table-value-icon">X</span>
+                        <p class="text bold white mb-1">{{collection.node.stats.floor.toFixed(2)}}</p>
+                        <small class="text-label up d-flex align-items-center">
+                            <span class="material-icons table-value-icon ">
+                                north_east
+                            </span>
                             0.48%
                         </small>
                     </td>
                     <td class="table-cell">
-                        <p class="text bold white mb-0">4.18</p>
-                        <small class="text-label">
-                            <span class="table-value-icon">X</span>
+                        <p class="text bold white mb-1">{{collection.node.stats.totalSales.toFixed(2)}}</p>
+                        <small class="text-label up d-flex align-items-center">
+                            <span class="material-icons table-value-icon ">
+                                north_east
+                            </span>
+                            
                             0.48%
                         </small>
                     </td>
                     <td class="table-cell">
-                        <p class="text bold white mb-0">4.18</p>
-                        <small class="text-label">
-                            <span class="table-value-icon">X</span>
+                        <p class="text bold white mb-1">{{collection.node.stats.average.toFixed(2)}}</p>
+                        <small class="text-label down d-flex align-items-center">
+                            <span class="material-icons table-value-icon ">
+                                south_east
+                            </span>
                             0.48%
                         </small>
                     </td>
                     <td class="table-cell">
-                        <p class="text bold white mb-0">4.18</p>
-                        <small class="text-label">
-                            <span class="table-value-icon">X</span>
+                        <p class="text bold white mb-1">{{collection.node.stats.volume.toFixed(2)}}</p>
+                        <small class="text-label down d-flex align-items-center">
+                            <span class="material-icons table-value-icon ">
+                                south_east
+                            </span>
                             0.48%
                         </small>
                     </td>
                     <td class="table-cell">
-                        <p class="text bold white mb-0">4.18</p>
-                        <small class="text-label">
-                            <span class="table-value-icon">X</span>
+                        <p class="text bold white mb-1">{{(collection.node.stats.floor * collection.node.stats.totalSales).toFixed(2)}}</p>
+                        <small class="text-label down d-flex align-items-center">
+                            <span class="material-icons table-value-icon ">
+                                south_east
+                            </span>
                             0.48%
                         </small>
                     </td>
+                   
 
                     <td class="table-cell">
                         <div class="graph"></div>
                     </td>
                 </tr>
+
+
+ </template>
+                </tbody>
+
             </table>
+
+
+
         </div>
         
     </section>
@@ -92,14 +117,35 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import gql from 'graphql-tag';
+import TRENDING from '@/graphql/Trending.gql';
+
+
 export default Vue.extend({
+
     data(){
         return {
-
+            collections : []
+        }
+    },
+    apollo:{
+        collections : {
+            query: TRENDING,
+            update : data => data.contracts.edges,
+            prefetch: true,
         }
     },
     methods:{
+        sumAttributesArray( arr : {valueCount : number}[]) : number {
 
+            let total_count = 0;
+
+            arr.map(item => ( total_count += item.valueCount) )
+
+            
+            return total_count;
+
+        }
     }
 })
 </script>
@@ -114,7 +160,9 @@ export default Vue.extend({
         font-size: 14px;
 
         .table-cell{
-            padding: 8px 20px;
+            padding: 12px 20px;
+            font-size: 12px;
+            letter-spacing: -0.1px;
         }
     }
 
@@ -124,16 +172,40 @@ export default Vue.extend({
 
     .table-cell{
             padding: 12px 20px;
+            min-width: 120px;
+            line-height: normal;
         }
 
     .table-cell.primary {
         display: inline-flex;
         min-width: 256px;
+        align-items: center;
         img{
             height: 32px;
+            border-radius: 32px;
             
         }
     }
 
+
+    .table tbody{
+        background-color: #141c25;
+    }
     
+
+    .table-value-icon{
+        font-size: 14px;
+        line-height: 1;
+        margin-right: 2px;
+
+
+        
+    }
+
+    .down{
+            color: #f45b69;
+        }
+        .up{
+            color: #78ffd6;
+        }
 </style>

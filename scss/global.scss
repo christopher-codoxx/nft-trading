@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 body {
     background-color: #0d1118;
 }
@@ -52,13 +53,14 @@ $text-color: #a4b0cb;
 }
 
 .date-filters {
-    justify-content: end;
+    justify-content: flex-end;
     display: inline-flex;
     margin: 0 12px;
     background-color: #141c25;
     padding: 8px 20px;
     border-top-left-radius: 12px;
     border-top-right-radius: 12px;
+    align-items: center;
 }
 
 .dashboard-filter-btn {
@@ -89,4 +91,12 @@ $text-color: #a4b0cb;
 
 .white {
     color: white;
+}
+
+.icon {
+    font-size: 16px;
+    display: block;
+    height: 16px;
+    width: 16px;
+    line-height: normal;
 }
