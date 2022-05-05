@@ -1,8 +1,8 @@
-export const NuxtLogo = () => import('../../components/NuxtLogo.vue' /* webpackChunkName: "components/nuxt-logo" */).then(c => wrapFunctional(c.default || c))
-export const Tutorial = () => import('../../components/Tutorial.vue' /* webpackChunkName: "components/tutorial" */).then(c => wrapFunctional(c.default || c))
-export const Dashboard = () => import('../../components/dashboard.vue' /* webpackChunkName: "components/dashboard" */).then(c => wrapFunctional(c.default || c))
-export const HeaderComponent = () => import('../../components/header-component.vue' /* webpackChunkName: "components/header-component" */).then(c => wrapFunctional(c.default || c))
-export const Subheader = () => import('../../components/subheader.vue' /* webpackChunkName: "components/subheader" */).then(c => wrapFunctional(c.default || c))
+export { default as NuxtLogo } from '../../components/NuxtLogo.vue'
+export { default as Tutorial } from '../../components/Tutorial.vue'
+export { default as Dashboard } from '../../components/dashboard.vue'
+export { default as HeaderComponent } from '../../components/header-component.vue'
+export { default as Subheader } from '../../components/subheader.vue'
 
 // nuxt/nuxt.js#8607
 function wrapFunctional(options) {
