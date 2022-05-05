@@ -142,7 +142,6 @@ export default Vue.extend({
 
             arr.map(item => ( total_count += item.valueCount) )
 
-            
             return total_count;
 
         }
