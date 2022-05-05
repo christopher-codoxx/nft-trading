@@ -6,7 +6,14 @@
         "use": "@nuxtjs/vercel-builder",
         "config":
         {
-            "memory" : 60
+            "serverFiles": [
+                "package.json",
+                "server/**"
+            ],
+            "tscOptions": {
+                "sourceMap": false
+              },
+            "internalServer": true
         }
       }
     ]
